@@ -10,10 +10,10 @@ class MainScreen{
   int pvpY;
   
   MainScreen(){
-    backgroundImage = loadImage("Assests/Maps/Park_Map.jpeg"); 
+    backgroundImage = loadImage("../Assests/Maps/Park_Map.jpeg"); 
     
-    titleFont = createFont("Assests/Fonts/Sixtyfour-Regular.ttf",100);
-    optionFont = createFont("Assests/Fonts/Sixtyfour-Regular.ttf",40); 
+    titleFont = createFont("../Assests/Fonts/Sixtyfour-Regular.ttf",100);
+    optionFont = createFont("../Assests/Fonts/Sixtyfour-Regular.ttf",40); 
     
     buttonX = width/2; 
     buttonWidth = 300;
