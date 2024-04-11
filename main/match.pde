@@ -14,6 +14,6 @@ class match {
   //}
   
   void runMatch() {
-      location.openScreen();
+      //location.openScreen();
   }
 }
