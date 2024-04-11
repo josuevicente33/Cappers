@@ -2,7 +2,7 @@
 
 class match {
   String matchType;
-  fightScreen location;
+  FightScreen location;
   fighter fighter1;
   fighter fighter2;
   

@@ -1,16 +1,16 @@
 // fight screen class
 
-class fightScreen {
+class FightScreen {
   String name;
   String fileName;
   PImage background;
   
-  fightScreen() {
+  FightScreen() {
     this.name = name;
     this.fileName = fileName;
-    background = loadImage("../Assests/Maps/Park_Map.jpeg");
+    background = loadImage("../Assets/Maps/Park_Map.jpeg");
   }
-    fightScreen(String name, String fileName) {
+    FightScreen(String name, String fileName) {
     this.name = name;
     this.fileName = fileName;
     background = loadImage(fileName);
