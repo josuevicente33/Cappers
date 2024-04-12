@@ -28,15 +28,15 @@ void draw() {
    case 1:
      //character screen for PVP player
      selectionscreen.display(); 
-     println("PVP Selected");
+     selectionscreen.chooseCharacter(current_state); 
+     selectionscreen.chooseMap(current_state); 
+     //println("PVP Selected");
      break; 
    case 2:
      //charcter screen for Single Player
      selectionscreen.display(); 
      selectionscreen.chooseCharacter(current_state); 
      selectionscreen.chooseMap(current_state); 
-
-     
      //println("Single Selected");
 
      break; 
