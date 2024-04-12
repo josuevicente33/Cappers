@@ -3,9 +3,10 @@ MainScreen mainscreen;
 SelectionScreen selectionscreen; 
 FightScreen fightscreen; 
 
-
-
 int current_state = 0; 
+int map_select = 0; 
+int player1_char = 0; 
+int player2_select = 0; 
 
 void setup() {
   size(1280, 720,P3D);  
@@ -32,7 +33,11 @@ void draw() {
    case 2:
      //charcter screen for Single Player
      selectionscreen.display(); 
-     println("Single Selected");
+     selectionscreen.chooseCharacter(current_state); 
+     selectionscreen.chooseMap(current_state); 
+
+     
+     //println("Single Selected");
 
      break; 
   }
