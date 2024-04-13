@@ -42,6 +42,11 @@ class SelectionScreen {
     mapOption = 0; 
     charOption = 0; 
   }
+  
+  boolean isSelectionComplete() {
+    return mapSelect && charSelect;
+  }
+
 
   void display() {
       image(backgroundImage,0,0,1280,720); 
@@ -61,30 +66,52 @@ class SelectionScreen {
       image(cityMap,724,444,378,200);   
   }
   
-  int chooseCharacter(int selection){
-     if (dist(mouseX, mouseY, 243, 158) < 150 && mousePressed) {
-        println("Character 1!");
-        charSelect = true; 
-        return 1;
-      }
-     if(dist(mouseX, mouseY, 834, 158) < 150 && mousePressed){
-        println("Character 2"); 
-        charSelect = true;
-        return 2;
-      }
-    return 0; 
+  void handleMousePressed() {
+    // Generic method to handle all clickable areas
+    chooseCharacter();
+    chooseMap();
   }
   
-  int chooseMap(int selection){
-    if(mouseX > 133 && mouseX < 133 + 378 && mouseY > 444 && mouseY < 444 + 200) {
+  int chooseCharacter() {
+    if (dist(mouseX, mouseY, 243, 158) < 150 && mousePressed) {
+      println("Character 1!");
+      charSelect = true;
+      charOption = 1;
+      return 1;
+    }
+    if (dist(mouseX, mouseY, 834, 158) < 150 && mousePressed) {
+      println("Character 2");
+      charSelect = true;
+      charOption = 2;
+      return 2;
+    }
+    return 0;
+   }
+
+  int chooseMap() {
+    if (mouseX > 133 && mouseX < 511 && mouseY > 444 && mouseY < 644) {
       println("Park Map");
-      return 1; 
+      mapSelect = true;
+      mapOption = 1;
+      return 1;
     }
-    if(mouseX > 724 && mouseX < 724 + 378 && mouseY > 444 && mouseY < 444 + 200){
-      println("City Map"); 
-      return 2; 
+    if (mouseX > 724 && mouseX < 1102 && mouseY > 444 && mouseY < 644) {
+      println("City Map");
+      mapSelect = true;
+      mapOption = 2;
+      return 2;
     }
-    return 0; 
+    return 0;
   }
-  
+
+    
+    
+    int currentStateUpdate(int currentState) {
+      if (mapOption != 0 && charOption != 0) {
+        return 3;
+      }
+
+      return currentState;
+    }
+      
 }
