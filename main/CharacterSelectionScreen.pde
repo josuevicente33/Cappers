@@ -2,7 +2,6 @@
 
 class SelectionScreen {
   PImage backgroundImage;
-  PFont titleFont; 
   PFont optionFont; 
   
   PImage parkMap; 
@@ -13,6 +12,9 @@ class SelectionScreen {
   
   int mapOption; 
   int charOption; 
+  
+  PImage Character1; 
+  PImage Character2; 
  
   SelectionScreen() {
     backgroundImage = loadImage("../Assets/Maps/Park_Map.jpeg");  
@@ -24,6 +26,11 @@ class SelectionScreen {
     
     mapOption = 0; 
     charOption = 0; 
+    
+    Character1 = loadImage("../Assets/Characters/Mateo_Charcter.png");
+    Character2 = loadImage("../Assets/Characters/2nd_Character-idle.png");
+    optionFont = createFont("../Assets/Fonts/Sixtyfour-Regular.ttf",40); 
+
   }
   
   SelectionScreen(int selection) {
@@ -41,6 +48,12 @@ class SelectionScreen {
     
     mapOption = 0; 
     charOption = 0; 
+    
+    Character1 = loadImage("../Assets/Characters/Mateo_Charcter.png");
+    Character2 = loadImage("../Assets/Characters/2nd_Character-idle.png");
+    
+    optionFont = createFont("../Assets/Fonts/Sixtyfour-Regular.ttf",40); 
+
   }
   
   boolean isSelectionComplete() {
@@ -50,10 +63,14 @@ class SelectionScreen {
 
   void display() {
       image(backgroundImage,0,0,1280,720); 
-      
+      textFont(optionFont); 
+      text("Choose character and map", width/2,100); 
+
       ellipseMode(CORNER);
       circle(243,158,150);
+      image(Character1, 270,180,100,100);
       circle(834,158,150);
+      image(Character2, 850,180,100,100);
       
       rectMode(CORNER); 
       fill(255); 

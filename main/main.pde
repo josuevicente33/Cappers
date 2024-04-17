@@ -40,7 +40,11 @@ void draw() {
       }
       break;
     case PVP_SELECTION:
-    
+      if (mousePressed) {
+          int selectedOption = mainscreen.OptionPressed();
+          selectionscreen = new SelectionScreen(selectedOption);
+          currentState = (selectedOption == 2) ? GameState.PVP_SELECTION : GameState.SINGLE_PLAYER_SELECTION;
+        }
     break;
     
     
