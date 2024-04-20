@@ -60,7 +60,6 @@ class SelectionScreen {
     return mapSelect && charSelect;
   }
 
-
   void display() {
       image(backgroundImage,0,0,1280,720); 
       textFont(optionFont); 
@@ -84,10 +83,10 @@ class SelectionScreen {
   }
   
   void handleMousePressed() {
-    // Generic method to handle all clickable areas
     chooseCharacter();
     chooseMap();
   }
+  
   
   int chooseCharacter() {
     if (dist(mouseX, mouseY, 243, 158) < 150 && mousePressed) {
@@ -105,26 +104,27 @@ class SelectionScreen {
     return 0;
    }
 
+
   int chooseMap() {
+    
     if (mouseX > 133 && mouseX < 511 && mouseY > 444 && mouseY < 644) {
       println("Park Map");
       mapSelect = true;
-      mapOption = 1;
-      return 1;
+      mapOption = 0;
     }
     if (mouseX > 724 && mouseX < 1102 && mouseY > 444 && mouseY < 644) {
       println("City Map");
       mapSelect = true;
-      mapOption = 2;
-      return 2;
+      mapOption = 1;
     }
-    return 0;
+    
+    return mapOption;
   }
 
     
     
     int currentStateUpdate(int currentState) {
-      if (mapOption != 0 && charOption != 0) {
+      if (isSelectionComplete()) {
         return 3;
       }
 
