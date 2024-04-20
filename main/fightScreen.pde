@@ -1,5 +1,3 @@
-import java.util.Random;
-
 class FightScreen {
   PImage fightMap;
   int xMax, yMax;
