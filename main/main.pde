@@ -60,8 +60,8 @@ void draw() {
       }
 
       if (selectionscreen.isSelectionComplete()) {
-        fighter1 = new fighter("Fighter1", 100, 500, 'w', 's', 'a', 'd'); // WASD for player one
-        fighter2 = new fighter("CPU", 200, 500, 'i', 'k', 'j', 'l'); // IJKL for player two
+        fighter1 = new fighter("Fighter1", 100, 500, 'w', 's', 'a', 'd', true); // WASD for player one
+        fighter2 = new fighter("CPU", 200, 500, 'i', 'k', 'j', 'l', false); // IJKL for player two
 
         currentState = GameState.FIGHT_SCREEN;
         fightscreen = new FightScreen(map_select, fighter1, fighter2);
@@ -72,6 +72,9 @@ void draw() {
     case FIGHT_SCREEN:
     fightscreen.display();
     fightscreen.updateFight();
+    if(fightscreen.winner) {
+      //handle what to do after fight is over
+    }
     break;
   
   }

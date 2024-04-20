@@ -8,6 +8,7 @@ class fighter {
   char upKey, downKey, leftKey, rightKey; // Keys for controlling the fighter
   boolean facingRight = true;
   boolean isAttacking = false;
+  boolean player;
 
   
   float yVel = 0;
@@ -20,7 +21,7 @@ class fighter {
     function.run();
   }
   
-  fighter(String name, int xPos, int yPos, char up, char down, char left, char right) {
+  fighter(String name, int xPos, int yPos, char up, char down, char left, char right, boolean player) {
     if (name == "CPU") {
         fighterImage = loadImage("../Assets/Characters/2nd_Character-idle.png");
     }
@@ -36,6 +37,7 @@ class fighter {
     this.downKey = down;
     this.leftKey = left;
     this.rightKey = right;
+    this.player = player;
   }
   
 void display() {
@@ -61,22 +63,29 @@ void display() {
     }
 
     // movement
-    if (keyPressed) {
-      if (key == upKey && yPos == yMax) {
-        yVel = -10; // This value controls the jump strength
+    if(player){
+      if (keyPressed) {
+        if (key == upKey && yPos == yMax) {
+          yVel = -10; // This value controls the jump strength
+        }
+        
+        if (key == leftKey) {
+          facingRight = false;
+          xPos -= 5;
+        }
+        if (key == rightKey) {
+          facingRight = true;
+          xPos += 5;
+        }
+        if (key == 'c' || key == 'v' || key == 'C' || key == 'V') {
+          isAttacking = true;
+        }
       }
-      
-      if (key == leftKey) {
-        facingRight = false;
-        xPos -= 5;
-      }
-      if (key == rightKey) {
-        facingRight = true;
-        xPos += 5;
-      }
-      if (key == 'c') {
-        isAttacking = true;
-      }
+    }
+    else {
+      xPos += (random(-5, 5));
+      float attackChance = random(4);
+      if(attackChance<=3){isAttacking = true;} //75% chance of cpu attacking when in range
     }
     
     // limit where characters can go
