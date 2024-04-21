@@ -25,6 +25,18 @@ class FightScreen {
     background(fightMap);
     player1.display();
     player2.display();
+    
+    textSize(20);
+    text("Player 1:", 100, 25);
+    fill(250, 10, 10);
+    for(int i = 0; i < player1.health; i++) {
+      rect((190 + (i*3)), 17, 3, 15);  
+    }
+    for(int i = 0; i < player2.health; i++) {
+      rect((190 + (i*3)), 42, 3, 15);  
+    }
+    noFill();
+    text("Player 2:", 100, 50);
   }
 
   void updateFight() {
@@ -32,39 +44,51 @@ class FightScreen {
     player2.updatePosition(yMax);
     
   // doing anythign else  
-    
+    if(Math.abs(player1.xPos-player2.xPos) <= 200 && Math.abs(player1.xPos-player2.xPos) <= 200){player1.cooldown--;}
     if(player1.isAttacking) {
-       if(Math.abs(player1.xPos-player2.xPos) <= 100 && Math.abs(player1.xPos-player2.xPos) <= 200) {
-         if(key == 'c' || key == 'C'){
-           player2.health -= 5;
+       if(Math.abs(player1.xPos-player2.xPos) <= 200 && Math.abs(player1.xPos-player2.xPos) <= 200) {
+         if(player1.cooldown <= 0){
+           if(key == 'c' || key == 'C'){
+             player2.health -= 5;
+           }
+           else if(key == 'V' || key == 'v') {
+             player2.health -= 10;
+           }
+           println("P2 health:", player2.health);
+           player1.cooldown = 50;
          }
-         else if(key == 'V' || key == 'v') {
-           player2.health -= 10;
+         else {
+           player1.cooldown--;
          }
-         println("health:", player2.health);
+        // println("P1 cooldown", player1.cooldown);
       }
       player1.isAttacking = false;
       if(player2.health <= 0){handleEnd("Player 1");}
-      
-      delay(200);
     }
-    /*
+    
     if(player2.isAttacking) {
+
        if(Math.abs(player1.xPos-player2.xPos) <= 100 && Math.abs(player1.xPos-player2.xPos) <= 200) {
-         float attackType = random(-1, 1);
-         if(attackType >= 0) {
-           player1.health -= 10;  
+         if(player2.cooldown == 0){
+           println(Math.abs(player1.xPos-player2.xPos));
+           float attackType = random(-1, 1);
+           if(attackType >= 0) {
+             player1.health -= 5;  
+           }
+           else {
+             player1.health -= 10;  
+           }
+          // println("P1 health:", player1.health);
+           player2.cooldown = 50;
          }
          else {
-           player1.health -= 5;  
+           player2.cooldown--;  
          }
-         println("health:", player1.health);
-         delay(200);
+         println("P2 cooldown", player2.cooldown);
       }
       player2.isAttacking = false;    
       if(player1.health <= 0){handleEnd("Player 2");}
     }
-    */
   }
   
   void handleEnd(String player) {

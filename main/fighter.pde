@@ -1,5 +1,5 @@
 // fighter class
-
+int direction = 1; 
 class fighter {
   String name;
   int xPos, yPos;
@@ -9,6 +9,7 @@ class fighter {
   boolean facingRight = true;
   boolean isAttacking = false;
   boolean player;
+  int cooldown;
 
   
   float yVel = 0;
@@ -38,6 +39,7 @@ class fighter {
     this.leftKey = left;
     this.rightKey = right;
     this.player = player;
+    this.cooldown = 0;
   }
   
 void display() {
@@ -55,6 +57,7 @@ void display() {
   void updatePosition(int yMax) {
     yVel += gravity;
     yPos += yVel;
+    if(health == 0){return;}
 
     // Check for ground collision
     if (yPos > yMax) {
@@ -83,7 +86,10 @@ void display() {
       }
     }
     else {
-      xPos += (random(-5, 5));
+      xPos += direction;
+      if(xPos >= 900 || xPos <= 100) {direction*=-1; facingRight = !facingRight;}
+      //println("x", xPos);
+     //println("dir", direction);
       float attackChance = random(4);
       if(attackChance<=3){isAttacking = true;} //75% chance of cpu attacking when in range
     }
