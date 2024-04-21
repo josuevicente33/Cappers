@@ -79,16 +79,7 @@ void draw() {
     case END_SCREEN:
     // restart button, quit etc
     // here need to dislay winning stats, not sure what though
-    if (fightscreen.winner) { 
-      
-    println("Player 1 Wins"); 
-    
-    }
-    else { 
-      
-    println("Player 1 Wins"); 
-    
-    }
+    fightscreen.displayEndScreen();
     
     break;
   
