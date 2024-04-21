@@ -72,9 +72,9 @@ void draw() {
     case FIGHT_SCREEN:
     fightscreen.display();
     fightscreen.updateFight();
-    if(fightscreen.winner) {
+    //if(fightscreen.winner) {
       //handle what to do after fight is over
-    }
+    //}
     break;
   
   }
