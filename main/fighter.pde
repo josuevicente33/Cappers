@@ -13,6 +13,7 @@ class fighter {
   HashMap<String, PImage> images = new HashMap<>();
   String charName;
   String charAttackName;
+  int wins;
 
   
   float yVel = 0;
@@ -55,6 +56,7 @@ class fighter {
     this.rightKey = right;
     this.player = player;
     this.cooldown = 0;
+    this.wins = 0;
   }
   
 void display() {
@@ -105,6 +107,8 @@ void display() {
        }
     }
     else {
+      // this else is for CPU controls
+      
       xPos += direction;
       if(xPos >= 900 || xPos <= 100) {
         direction*=-1; 
@@ -114,6 +118,8 @@ void display() {
         else { fighterImage = images.get("leftWalk"); };
         
       }
+      
+      // if the CPU attacks, then we change the image to display that. if not, then just regular
       //println("x", xPos);
      //println("dir", direction);
       float attackChance = random(4);
@@ -121,9 +127,17 @@ void display() {
       if(attackChance<=3){
         isAttacking = true; 
         
-       if (facingRight) { fighterImage = images.get("rightAttack"); }
-       else { fighterImage = images.get("leftAttack"); };
-       
+       if (facingRight)
+         fighterImage = images.get("rightAttack");
+       else
+         fighterImage = images.get("leftAttack");
+     }
+     else {
+       isAttacking = !isAttacking;
+       if (facingRight)
+        fighterImage = images.get("rightWalk");
+       else 
+        fighterImage = images.get("leftWalk");
      }
    }
     
