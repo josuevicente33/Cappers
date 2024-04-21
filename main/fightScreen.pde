@@ -6,12 +6,19 @@ class FightScreen {
   int xMax, yMax;
   boolean winner;
   fighter player1, player2;
+  int roundNumber, requiredRounds;
 
   FightScreen(int mapSelect, fighter player1, fighter player2) {
     println("Map select: " + mapSelect);
-    for(int i = 0; i < 5; i++) {
+    
+    // for round based
+    this.requiredRounds = 2  ;
+    this.roundNumber = 0;
+    for(int i = 0; i < requiredRounds; i++) {
         cpus[i] = player2;
     }
+    
+
     
     this.player1 = player1;
     this.player2 = cpus[0];
@@ -76,11 +83,12 @@ class FightScreen {
         count++;
         if(count >= cpus.length){
           handleEnd("Player 1");
+          player1.wins++;
         }
         else {
           player2 = cpus[count];
           player2.health = 100;
-          player2.xPos = 500;
+          player2.xPos = 700;
           //println("P2New:", player2.health);
         }
         //delay(100);
@@ -109,16 +117,53 @@ class FightScreen {
          //println("P2 cooldown", player2.cooldown);
       }
       player2.isAttacking = false;    
-      if(player1.health <= 0){handleEnd("Player 2");}
+      if(player1.health <= 0){
+        handleEnd("Player 2");
+        player2.wins++;
+    }
     }
   }
   
   void handleEnd(String player) {
-    print(player, "Wins!");
-    winner = true;
+    this.roundNumber++;
+    println(player);
+    
+    if (roundNumber < requiredRounds) {
+      player1.xPos = 100;
+      player1.yPos = 500;
+      
+      player2.xPos = 700;
+      player2.yPos = 500;
+      
+      delay(1000);
+    }
+    
+    
+    
+    delay(1000);
   }
-
-  void handleMousePressed() {
-    // Handle mouse inputs specific to the fight screen, if any
+  
+  // this might be able to be placed in its own class
+  void displayEndScreen() {
+     // end screen things
+       if (player1.wins > player2.wins) {
+        println("GameWin:P1:" + player1.wins);
+       }
+       else if (player2.wins > player1.wins) {
+        println("GameWin:P2:" + player2.wins);
+       }
+       else if (player1.wins == player2.wins) {
+         println("Draw:P1:" + player1.wins + ":P2L:" + player2.wins);
+       }
+     
   }
+  
+  
+  GameState updateState(GameState currentState) {
+    // currently the only way to change to end scren is by the rounds being over.
+    if (roundNumber > requiredRounds) { return GameState.END_SCREEN; }
+    
+    return currentState;
+  }
+  
 }

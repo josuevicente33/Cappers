@@ -19,7 +19,8 @@ enum GameState {
   MAIN_SCREEN,
   EXIT_SELECTION,
   SINGLE_PLAYER_SELECTION,
-  FIGHT_SCREEN
+  FIGHT_SCREEN,
+  END_SCREEN
 }
 
 GameState currentState = GameState.MAIN_SCREEN;
@@ -89,7 +90,16 @@ void draw() {
     //if(fightscreen.winner) {
       //handle what to do after fight is over
     //}
+      fightscreen.display();
+      fightscreen.updateFight();
+      currentState = fightscreen.updateState(currentState);
     break;
+    
+    case END_SCREEN:
+    // restart button, quit etc
+    // here need to dislay winning stats, not sure what though
+    fightscreen.displayEndScreen();
+        break;
   
   }
 }
