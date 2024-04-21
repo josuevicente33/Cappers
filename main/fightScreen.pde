@@ -145,6 +145,9 @@ class FightScreen {
   
   // this might be able to be placed in its own class
   void displayEndScreen() {
+    
+        PImage currMap = loadImage("../Assets/Screens/bACKGROUND.jpeg");
+        background(currMap);
      // end screen things
        if (player1.wins > player2.wins) {
         println("GameWin:P1:" + player1.wins);
