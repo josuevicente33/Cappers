@@ -1,4 +1,8 @@
 
+import processing.sound.*;
+SoundFile sound;
+SoundFile attack; 
+
 MainScreen mainscreen;
 SelectionScreen selectionscreen; 
 FightScreen fightscreen; 
@@ -10,9 +14,10 @@ int map_select = 0;
 int player1_char = 0; 
 int player2_select = 0; 
 
+
 enum GameState {
   MAIN_SCREEN,
-  PVP_SELECTION,
+  EXIT_SELECTION,
   SINGLE_PLAYER_SELECTION,
   FIGHT_SCREEN
 }
@@ -24,11 +29,17 @@ void setup() {
   size(1280, 720);  
   mainscreen = new MainScreen(); 
   selectionscreen = new SelectionScreen(); 
+  sound = new SoundFile(this, "../Assets/Sound Effects/main_music.mp3");
+  sound.play();
+  
+  attack = new SoundFile(this, "../Assets/Sound Effects/Hurt.wav");
+
   currentMatch = new match(null, null, null, null);
+  
 }
 
 void draw() {
-  background(200, 100, 0);
+  background(0);
   
   switch(currentState) {
     case MAIN_SCREEN:
@@ -37,17 +48,15 @@ void draw() {
       if (mousePressed) {
         int selectedOption = mainscreen.OptionPressed();
         selectionscreen = new SelectionScreen(selectedOption);
-        currentState = (selectedOption == 1) ? GameState.PVP_SELECTION : GameState.SINGLE_PLAYER_SELECTION;
+        currentState = (selectedOption == 1) ? GameState.EXIT_SELECTION : GameState.SINGLE_PLAYER_SELECTION;
       }
       
       break;
       
-    case PVP_SELECTION:
-      //if (mousePressed) {
-      //    int selectedOption = mainscreen.OptionPressed();
-      //    selectionscreen = new SelectionScreen(selectedOption);
-      //    currentState = (selectedOption == 2) ? GameState.PVP_SELECTION : GameState.SINGLE_PLAYER_SELECTION;
-      //  }
+    case EXIT_SELECTION:
+      if (mousePressed) {
+          exit(); 
+        }
     break;
     
     
@@ -72,6 +81,11 @@ void draw() {
     case FIGHT_SCREEN:
     fightscreen.display();
     fightscreen.updateFight();
+    if(keyPressed){
+      if(key == 'c'){
+          attack.play(); 
+      }
+    }
     //if(fightscreen.winner) {
       //handle what to do after fight is over
     //}
