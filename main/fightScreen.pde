@@ -1,3 +1,6 @@
+int count = 0; 
+fighter[] cpus = new fighter[5];
+
 class FightScreen {
   PImage fightMap;
   int xMax, yMax;
@@ -6,9 +9,12 @@ class FightScreen {
 
   FightScreen(int mapSelect, fighter player1, fighter player2) {
     println("Map select: " + mapSelect);
+    for(int i = 0; i < 5; i++) {
+        cpus[i] = player2;
+    }
     
     this.player1 = player1;
-    this.player2 = player2;
+    this.player2 = cpus[0];
     this.winner = false;
     if (mapSelect == 1) {
       fightMap = loadImage("../Assets/Maps/City_Map.jpeg");
@@ -37,6 +43,9 @@ class FightScreen {
     }
     noFill();
     text("Player 2:", 100, 50);
+    
+    fill(10, 15, 10);
+    text(("Score: " + count), 690, 50);
   }
 
   void updateFight() {
@@ -63,7 +72,20 @@ class FightScreen {
         // println("P1 cooldown", player1.cooldown);
       }
       player1.isAttacking = false;
-      if(player2.health <= 0){handleEnd("Player 1");}
+      if(player2.health <= 0){
+        count++;
+        if(count >= cpus.length){
+          handleEnd("Player 1");
+        }
+        else {
+          player2 = cpus[count];
+          player2.health = 100;
+          player2.xPos = 500;
+          //println("P2New:", player2.health);
+        }
+        //delay(100);
+      }
+      println("Score:", count);
     }
     
     if(player2.isAttacking) {
@@ -84,7 +106,7 @@ class FightScreen {
          else {
            player2.cooldown--;  
          }
-         println("P2 cooldown", player2.cooldown);
+         //println("P2 cooldown", player2.cooldown);
       }
       player2.isAttacking = false;    
       if(player1.health <= 0){handleEnd("Player 2");}
