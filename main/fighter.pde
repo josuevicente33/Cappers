@@ -106,12 +106,26 @@ void display() {
     }
     else {
       xPos += direction;
-      if(xPos >= 900 || xPos <= 100) {direction*=-1; facingRight = !facingRight;}
+      if(xPos >= 900 || xPos <= 100) {
+        direction*=-1; 
+        facingRight = !facingRight;
+        
+        if (facingRight) { fighterImage = images.get("rightWalk"); }
+        else { fighterImage = images.get("leftWalk"); };
+        
+      }
       //println("x", xPos);
      //println("dir", direction);
       float attackChance = random(4);
-      if(attackChance<=3){isAttacking = true;} //75% chance of cpu attacking when in range
-    }
+      //75% chance of cpu attacking when in range
+      if(attackChance<=3){
+        isAttacking = true; 
+        
+       if (facingRight) { fighterImage = images.get("rightAttack"); }
+       else { fighterImage = images.get("leftAttack"); };
+       
+     }
+   }
     
     // limit where characters can go
     yPos = constrain(yPos, 0, yMax);

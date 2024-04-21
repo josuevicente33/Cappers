@@ -6,6 +6,7 @@ class FightScreen {
   int xMax, yMax;
   boolean winner;
   fighter player1, player2;
+  int roundNumber;  
 
   FightScreen(int mapSelect, fighter player1, fighter player2) {
     println("Map select: " + mapSelect);
@@ -114,11 +115,34 @@ class FightScreen {
   }
   
   void handleEnd(String player) {
-    print(player, "Wins!");
-    winner = true;
+    roundNumber++;
+    println(player);
+    
+    
+    if (roundNumber < 1) {
+      player1.xPos = 100;
+      player1.yPos = 500;
+      
+      player2.xPos = 700;
+      player2.yPos = 500;
+      
+      delay(1000);
+      
+    }
+    else {
+      if (player == "Player 1") {
+        winner = true;
+      }
+      else {
+        winner = false;
+      }
+    }  
   }
-
-  void handleMousePressed() {
-    // Handle mouse inputs specific to the fight screen, if any
+  
+  GameState updateState(GameState currentState) {
+    if (roundNumber > 3) { return GameState.END_SCREEN; }
+    
+    return currentState;
   }
+  
 }
