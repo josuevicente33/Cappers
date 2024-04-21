@@ -10,6 +10,9 @@ class fighter {
   boolean isAttacking = false;
   boolean player;
   int cooldown;
+  HashMap<String, PImage> images = new HashMap<>();
+  String charName;
+  String charAttackName;
 
   
   float yVel = 0;
@@ -24,11 +27,23 @@ class fighter {
   
   fighter(String name, int xPos, int yPos, char up, char down, char left, char right, boolean player) {
     if (name == "CPU") {
-        fighterImage = loadImage("../Assets/Characters/2nd_Character-idle.png");
+      charName = "2nd_Character-idle";
+      charAttackName = "2nd_Charcter Attack";
+      images.put("rightWalk", loadImage("../Assets/Characters/"+ charName +".png"));
+      images.put("leftWalk", loadImage("../Assets/Characters/"+ charName + "_left.png"));
+      images.put("rightAttack", loadImage("../Assets/Characters/"+ charAttackName + ".png"));
+      images.put("leftAttack", loadImage("../Assets/Characters/"+ charAttackName + "_left.png"));
     }
     else {
-        fighterImage = loadImage("../Assets/Characters/Mateo_Charcter.png");
+      charName = "Mateo_Charcter";
+      charAttackName = "Mateo_Character_Attack";
+      images.put("rightWalk", loadImage("../Assets/Characters/"+ charName +".png"));
+      images.put("leftWalk", loadImage("../Assets/Characters/"+ charName + "_left.png"));
+      images.put("rightAttack", loadImage("../Assets/Characters/"+ charAttackName + ".png"));
+      images.put("leftAttack", loadImage("../Assets/Characters/"+ charAttackName + "_left.png"));
     }
+    
+    fighterImage = images.get("rightWalk");
     
     this.name = name;
     this.xPos = xPos;
@@ -43,15 +58,7 @@ class fighter {
   }
   
 void display() {
-    pushMatrix();
-    translate(xPos + 25, yPos + 25);
-
-    if (!facingRight) {
-        scale(-1, 1);
-    }
-
-    image(fighterImage, -25, -25, 50, 50);
-    popMatrix();
+    image(fighterImage, xPos, yPos, 50, 50);
 }
       
   void updatePosition(int yMax) {
@@ -75,15 +82,27 @@ void display() {
         if (key == leftKey) {
           facingRight = false;
           xPos -= 5;
+          fighterImage = images.get("leftWalk");
         }
         if (key == rightKey) {
           facingRight = true;
+          fighterImage = images.get("rightWalk");
           xPos += 5;
         }
         if (key == 'c' || key == 'v' || key == 'C' || key == 'V') {
           isAttacking = true;
+          if (facingRight)
+              fighterImage = images.get("rightAttack");
+          else 
+              fighterImage = images.get("leftAttack");
         }
       }
+      else {
+           if (facingRight)
+              fighterImage = images.get("rightWalk");
+          else 
+              fighterImage = images.get("leftWalk");
+       }
     }
     else {
       xPos += direction;
