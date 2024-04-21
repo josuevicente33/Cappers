@@ -32,15 +32,14 @@ class MainScreen{
      textFont(titleFont);
      text("CAPPERS",width/2, 100); 
      
-     textFont(optionFont); 
+     textFont(optionFont);
      rectMode(CENTER); 
      fill(76,170,82);
      noStroke();
      rect(buttonX,singleY,buttonWidth,buttonHeight,10);
      fill(255);
-     text("PVP", buttonX,singleY);
+     text("EXIT", buttonX,pvpY - 100);
      
-     rectMode(CENTER); 
      fill(76,170,82);
      noStroke();
      rect(buttonX,pvpY,buttonWidth,buttonHeight,10);
@@ -52,7 +51,7 @@ class MainScreen{
    int OptionPressed(){
     if(mousePressed){
       if(mouseX >= 490 && mouseX <= 790 && mouseY >= 235 && mouseY <= 280) {
-        println("Clicked on the PVP!");
+        println("Quit");
         return 1; 
        }
       else if(mouseX >= 490 && mouseX <= 790 && mouseY >= 335 && mouseY <= 385) {
