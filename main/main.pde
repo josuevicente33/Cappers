@@ -101,7 +101,12 @@ void draw() {
     // restart button, quit etc
     // here need to dislay winning stats, not sure what though
     fightscreen.displayEndScreen();
-        break;
+    if(keyPressed){
+      if(key == 'x'){
+          currentState = GameState.MAIN_SCREEN;
+          break;
+      }
+    }
   
   }
 }

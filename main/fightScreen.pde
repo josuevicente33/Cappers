@@ -137,11 +137,11 @@ class FightScreen {
     textSize(32); 
     fill(255); 
     if(player1.wins > player2.wins){
-      text("Player 1 wins: " + player1.wins, width/2, height*3/4);
+      text("Player 1 wins: " + player1.wins +" | PRESS X TO RESTART", width/2, height*3/4);
     }else if (player2.wins > player1.wins) {
-      text("Player 2 wins: " + player2.wins, width/2, height*3/4);
+      text("Player 2 wins: " + player2.wins+" | PRESS X TO RESTART", width/2, height*3/4);
     }else if (player1.wins == player2.wins) {
-      text("Draw: Player 1: " + player1.wins + " | Player 2: " + player2.wins, width/2, height*3/4);
+      text("Draw: Player 1: " + player1.wins + " | Player 2: " + player2.wins+" | PRESS X TO RESTART", width/2, height*3/4);
     }
      
   }
