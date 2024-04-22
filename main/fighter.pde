@@ -26,8 +26,7 @@ class fighter {
     function.run();
   }
   
-  fighter(String name, int xPos, int yPos, char up, char down, char left, char right, boolean player) {
-    if (name == "CPU") {
+  void loadCat() {
       charName = "2nd_Character-idle";
       charAttackName = "2nd_Charcter Attack";
       images.put("rightWalk", loadImage("../Assets/Characters/"+ charName +".png"));
@@ -35,13 +34,31 @@ class fighter {
       images.put("rightAttack", loadImage("../Assets/Characters/"+ charAttackName + ".png"));
       images.put("leftAttack", loadImage("../Assets/Characters/"+ charAttackName + "_left.png"));
     }
-    else {
+
+  
+  void loadMateo() {
       charName = "Mateo_Charcter";
       charAttackName = "Mateo_Character_Attack";
       images.put("rightWalk", loadImage("../Assets/Characters/"+ charName +".png"));
       images.put("leftWalk", loadImage("../Assets/Characters/"+ charName + "_left.png"));
       images.put("rightAttack", loadImage("../Assets/Characters/"+ charAttackName + ".png"));
       images.put("leftAttack", loadImage("../Assets/Characters/"+ charAttackName + "_left.png"));
+    }
+  
+  fighter(String name, int xPos, int yPos, char up, char down, char left, char right, boolean player) {
+
+    switch(name) {
+      case "CPUMateo":
+      case "Mateo":
+      loadMateo();
+      break;
+      
+      
+      case "Cat":
+      case "CPUCat":
+      loadCat();
+      break;
+      
     }
     
     fighterImage = images.get("rightWalk");

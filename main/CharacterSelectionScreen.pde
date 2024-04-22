@@ -90,18 +90,18 @@ class SelectionScreen {
   
   int chooseCharacter() {
     if (dist(mouseX, mouseY, 243, 158) < 150 && mousePressed) {
-      println("Character 1!");
+      println("Character 1! - Mateo");
       charSelect = true;
       charOption = 1;
       return 1;
     }
     if (dist(mouseX, mouseY, 834, 158) < 150 && mousePressed) {
-      println("Character 2");
+      println("Character 2 - Cat");
       charSelect = true;
       charOption = 2;
       return 2;
     }
-    return 0;
+    return charOption;
    }
 
 
