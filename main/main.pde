@@ -15,6 +15,7 @@ fighter fighter2;
 int map_select = 0; 
 int player1_char = 0; 
 int player2_select = 0; 
+int numRounds = 2;
 
 
 enum GameState {
@@ -86,7 +87,7 @@ void draw() {
    
 
         currentState = GameState.FIGHT_SCREEN;
-        fightscreen = new FightScreen(map_select, fighter1, fighter2);
+        fightscreen = new FightScreen(map_select, fighter1, fighter2, numRounds);
        // currentMatch = new match("single", fightscreen, fighter1, fighter2);
       }
     break;

@@ -15,6 +15,8 @@ class SelectionScreen {
   
   PImage Character1; 
   PImage Character2; 
+  
+  int numRounds;
  
   SelectionScreen() {
     backgroundImage = loadImage("../Assets/Maps/Park_Map.jpeg");  
@@ -30,6 +32,8 @@ class SelectionScreen {
     Character1 = loadImage("../Assets/Characters/Mateo_Charcter.png");
     Character2 = loadImage("../Assets/Characters/2nd_Character-idle.png");
     optionFont = createFont("../Assets/Fonts/Sixtyfour-Regular.ttf",40); 
+    
+    numRounds = 2;
 
   }
   
@@ -80,11 +84,24 @@ class SelectionScreen {
       rect(714,436,397,220);
       rect(724,444,378,200);
       image(cityMap,724,444,378,200);   
+      
+      rect(width/2-75,height/2-50,100,100);
+      rect(width/2-150,height/2-25,50,50);
+      rect(width/2+50,height/2-25,50,50);
+      fill(250, 10, 10);
+      text("Rounds", width/2-25, height/2-75);
+      text(numRounds, width/2-25, height/2);
+      text("+", width/2-125,height/2+3);
+      text("-", width/2+75,height/2+3);
+      fill(255); 
   }
   
   void handleMousePressed() {
     chooseCharacter();
     chooseMap();
+    chooseRounds();
+    println("x", mouseX);
+    println("y", mouseY);
   }
   
   
@@ -120,7 +137,16 @@ class SelectionScreen {
     
     return mapOption;
   }
-
+  
+  int chooseRounds() {
+    if (mouseX > width/2-150 && mouseX < width/2-100 && mouseY > height/2-25 && mouseY < height/2-25) {
+      if(numRounds<99){
+        numRounds++;
+        println("+");
+      }
+    }
+    return numRounds;
+  }
     
     
     int currentStateUpdate(int currentState) {

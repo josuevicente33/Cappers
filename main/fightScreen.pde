@@ -5,11 +5,11 @@ class FightScreen {
   fighter player1, player2;
   int roundNumber, requiredRounds;
 
-  FightScreen(int mapSelect, fighter player1, fighter player2) {
+  FightScreen(int mapSelect, fighter player1, fighter player2, int requiredRounds) {
     println("Map select: " + mapSelect);
     
     // for round based
-    this.requiredRounds = 2  ;
+    this.requiredRounds = requiredRounds;
     this.roundNumber = 0;
 
     
