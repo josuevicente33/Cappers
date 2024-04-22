@@ -145,19 +145,18 @@ class FightScreen {
   
   // this might be able to be placed in its own class
   void displayEndScreen() {
-    
-        PImage currMap = loadImage("../Assets/Screens/bACKGROUND.jpeg");
-        background(currMap);
-     // end screen things
-       if (player1.wins > player2.wins) {
-        println("GameWin:P1:" + player1.wins);
-       }
-       else if (player2.wins > player1.wins) {
-        println("GameWin:P2:" + player2.wins);
-       }
-       else if (player1.wins == player2.wins) {
-         println("Draw:P1:" + player1.wins + ":P2L:" + player2.wins);
-       }
+
+    PImage currMap = loadImage("../Assets/Screens/bACKGROUND.jpeg");
+    background(currMap);
+    textSize(32); 
+    fill(255); 
+    if(player1.wins > player2.wins){
+      text("Player 1 wins: " + player1.wins, width/2, height*3/4);
+    }else if (player2.wins > player1.wins) {
+      text("Player 2 wins: " + player2.wins, width/2, height*3/4);
+    }else if (player1.wins == player2.wins) {
+      text("Draw: Player 1: " + player1.wins + " | Player 2: " + player2.wins, width/2, height*3/4);
+    }
      
   }
   
