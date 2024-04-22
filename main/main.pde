@@ -27,7 +27,6 @@ enum GameState {
 
 GameState currentState = GameState.MAIN_SCREEN;
 
-
 void setup() {
   size(1280, 720);  
   mainscreen = new MainScreen(); 
@@ -71,9 +70,20 @@ void draw() {
         map_select = selectionscreen.chooseMap();
       }
 
+
+
       if (selectionscreen.isSelectionComplete()) {
-        fighter1 = new fighter("Fighter1", 100, 500, 'w', 's', 'a', 'd', true); // WASD for player one
-        fighter2 = new fighter("CPU", 200, 500, 'i', 'k', 'j', 'l', false); // IJKL for player two
+        
+      if (player1_char == 1) {
+          fighter1 = new fighter("Mateo", 100, 500, 'w', 's', 'a', 'd', true); // WASD for player one
+          fighter2 = new fighter("CPUCat",  200, 500, 'i', 'k', 'j', 'l', false); // IJKL for player two
+        
+       }
+       if (player1_char == 2) {
+          fighter1 = new fighter("Cat", 100, 500, 'w', 's', 'a', 'd', true); // WASD for player one
+          fighter2 = new fighter("CPUMateo",  200, 500, 'i', 'k', 'j', 'l', false); // IJKL for player two
+       }
+   
 
         currentState = GameState.FIGHT_SCREEN;
         fightscreen = new FightScreen(map_select, fighter1, fighter2);
