@@ -100,8 +100,6 @@ class SelectionScreen {
     chooseCharacter();
     chooseMap();
     chooseRounds();
-    println("x", mouseX);
-    println("y", mouseY);
   }
   
   
@@ -139,10 +137,16 @@ class SelectionScreen {
   }
   
   int chooseRounds() {
-    if (mouseX > width/2-150 && mouseX < width/2-100 && mouseY > height/2-25 && mouseY < height/2-25) {
+    if (mouseX > 450 && mouseX < 550 && mouseY > 300 && mouseY < 400) {
       if(numRounds<99){
         numRounds++;
         println("+");
+      }
+    }
+    if (mouseX > 650 && mouseX < 700 && mouseY > 300 && mouseY < 400) {
+      if(numRounds>-1){
+        numRounds--;
+        println("-");
       }
     }
     return numRounds;
@@ -157,4 +161,9 @@ class SelectionScreen {
       return currentState;
     }
       
+}
+
+void mousePressed(){
+     println("x", mouseX);
+    println("y", mouseY); 
 }
