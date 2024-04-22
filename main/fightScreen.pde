@@ -126,13 +126,7 @@ class FightScreen {
       
       player2.xPos = 700;
       player2.yPos = 500;
-      
-      delay(1000);
     }
-    
-    
-    
-    delay(1000);
   }
   
   // this might be able to be placed in its own class
@@ -155,7 +149,7 @@ class FightScreen {
   
   GameState updateState(GameState currentState) {
     // currently the only way to change to end scren is by the rounds being over.
-    if (roundNumber > requiredRounds) { return GameState.END_SCREEN; }
+    if (roundNumber >= requiredRounds) { return GameState.END_SCREEN; }
     
     return currentState;
   }
